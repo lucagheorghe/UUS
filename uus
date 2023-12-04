@@ -1,0 +1,22 @@
+#!/usr/bin/bash
+
+release_file=/etc/os-release
+echo "cautare update"
+sleep 1
+if grep -q "fedora" $release_file
+then
+   dnf check-update
+   sleep 1
+   dnf update -y
+fi
+
+if grep -q "debian" $release_file || grep -q "Ubuntu" $release_file
+then
+   apt update
+   apt dist-upgrade
+fi
+
+if grep -q "arch" $release_file
+then
+   pacman update -Syu
+fi
